@@ -1,4 +1,6 @@
 # Node-JSRender
+An actively maintained wrapper for the jsrender project by @borismoore (https://github.com/BorisMoore/jsrender). Uses latest source from the jsrender project and extends functionality for easy use in Node.js.
+
 ## Install
 npm install node-jsrender
 
