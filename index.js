@@ -1,30 +1,71 @@
-// Augment the jsRender object with a new method
-var jsRender = (function () {
+// Augment the jsRenderWrapper object with a new method
+var JsRenderWrapper = (function () {
 	var fs = require('fs'),
 		jsviews = require('jsrender/jsrender'),
-		JsRender = function () {};
+		JsRenderWrapper = function () {
+			// Create a custom property to store original template source in
+			this._original = this._original || {};
+		};
+
+	/**
+	 * Loads a template file asynchronously.
+	 * @param {String} name The name to assign the template. 
+	 * @param {String} path The path to the template file.
+	 * @param {Function=} callback Optional. The callback method to execute on loading the template.
+	 */
+	JsRenderWrapper.prototype.loadFile = function (name, path, callback) {
+		if (name) {
+			if (path) {
+				fs.readFile(path, {encoding: 'utf8'}, function (err, data) {
+					if (!err) {
+						var result = this.loadString(name, String(data));
+						if (callback) { callback(false, result); }
+					} else {
+						if (callback) { callback(err); }
+					}
+				});
+			} else {
+				throw('Cannot loadFile in jsRender if no path is passed: loadFileSync(name, path, callback);');
+			}
+		} else {
+			throw('Cannot loadFile in jsRender if no name is passed: loadFileSync(name, path, callback);');
+		}
+	};
 	
-	JsRender.prototype.loadFileSync = function (name, path) {
+	/**
+	 * Loads a template file synchronously.
+	 * @param {String} name The name to assign the template. 
+	 * @param {String} path The path to the template file.
+	 * @returns {Function} The compiled template. 
+	 */
+	JsRenderWrapper.prototype.loadFileSync = function (name, path) {
 		if (name) {
 			if (path) {
 				return this.loadString(name, String(fs.readFileSync(path, {encoding: 'utf8'})));
 			} else {
-				throw('Cannot loadFile in jsRender if no path is passed: loadFileSync(name, path);');
+				throw('Cannot loadFileSync in jsRender if no path is passed: loadFileSync(name, path);');
 			}
 		} else {
-			throw('Cannot loadFile in jsRender if no name is passed: loadFileSync(name, path);');
+			throw('Cannot loadFileSync in jsRender if no name is passed: loadFileSync(name, path);');
 		}
 	};
 	
-	JsRender.prototype.loadString = function (name, str) {
+	/**
+	 * Creates a template from a string.
+	 * @param {String} name The name to assign the template. 
+	 * @param {String} str The string that contains the template source code.
+	 * @returns {Function} The compiled template. 
+	 */
+	JsRenderWrapper.prototype.loadString = function (name, str) {
+		var self = this;
+		
 		if (name) {
 			if (str) {
-				var renderObj = {};
-					renderObj[name] = str;
+				// Store the original string
+				self._original[name] = String(str);
 				
-				jsviews.original[name] = String(str);
-				
-				return jsviews.templates(renderObj);
+				// Return the compiled template
+				return jsviews.templates(name, str);
 			} else {
 				throw('Cannot loadString in jsRender if no template string (str) is passed: loadString(name, str);');
 			}
@@ -32,15 +73,23 @@ var jsRender = (function () {
 			throw('Cannot loadString in jsRender if no template name (name) is passed: loadString(name, str);');
 		}
 	};
+
+	/**
+	 * Gets the original template source that generated the compiled template identified
+	 * by the name parameter passed.
+	 * @param {String} name The name of the template who's original source should be returned.
+	 * @returns {String}
+	 */
+	JsRenderWrapper.prototype.original = function (name) {
+		return this._original[name];
+	};
 	
-	jsviews.original = jsviews.original || {};
+	// Define the accessor variables
+	JsRenderWrapper.prototype.render = jsviews.render;
+	JsRenderWrapper.prototype.helpers = jsviews.views.helpers;
+	JsRenderWrapper.prototype.jsviews = jsviews;
 	
-	JsRender.prototype.render = jsviews.render;
-	JsRender.prototype.original = jsviews.original;
-	JsRender.prototype.helpers = jsviews.views.helpers;
-	JsRender.prototype.jsviews = jsviews;
-	
-	return JsRender;
+	return JsRenderWrapper;
 }());
 
-module.exports = new jsRender();
+module.exports = new JsRenderWrapper();
