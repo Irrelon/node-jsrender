@@ -35,6 +35,26 @@ jsrender.render['#myTemplate']({data: 'hello'});
 // Output is: "hello"
 ```
 
+### Loading a Template From a File (Asynchronously)
+```
+// Require the node module
+var jsrender = require('node-jsrender');
+
+// Load a template from ./templates/myTemplate.html
+//     Contents of ./templates/myTemplate.html is: "{{:data}}"
+jsrender.loadFile('#myTemplate', './templates/myTemplate.html', function (err, template) {
+	if (!err) {
+		// Template was loaded
+		// Render the template with data
+		jsrender.render['#myTemplate']({data: 'hello'});
+		
+		// Output is: "hello"
+	} else {
+		throw(err);
+	}
+});
+```
+
 ### Referencing Other Templates From Inside Templates
 In jsrender when you want to reference another template on the client-side you can use something like:
 
