@@ -3,9 +3,9 @@
 	"name": "node-jsrender",
 	"description": "An actively maintained wrapper for the jsrender project by @borismoore. Uses latest source from the jsrender project and extends functionality for easy use in Node.js.",
 	"version": "1.0.0",
-	"dependencies": {
+	/*"dependencies": {
 		"borismoore-jsrender": "https://github.com/coolbloke1324/jsrender.git"
-	},
+	},*/
 	"main": "./index",
 	"engines": {
 		"node": "*"
