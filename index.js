@@ -1,7 +1,7 @@
 // Augment the jsRenderWrapper object with a new method
 var JsRenderWrapper = (function () {
 	var fs = require('fs'),
-		jsviews = require('lib/jsrender'),
+		jsviews = require('./lib/jsrender'),
 		JsRenderWrapper = function () {
 			// Create a custom property to store original template source in
 			this._original = this._original || {};
