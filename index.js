@@ -41,7 +41,7 @@ var JsRenderWrapper = (function () {
 	JsRenderWrapper.prototype.loadFileSync = function (name, path) {
 		if (name) {
 			if (path) {
-				return this.loadString(name, String(fs.readFileSync(path, {encoding: 'utf8'})));
+				return this.loadString(name, String(fs.readFileSync(path, 'utf8')));
 			} else {
 				throw('Cannot loadFileSync in jsRender if no path is passed: loadFileSync(name, path);');
 			}
