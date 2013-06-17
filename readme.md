@@ -64,15 +64,15 @@ In jsrender, you can have templates that reference other templates, nested templ
 var jsrender = require('node-jsrender');
 
 // Load parent template from string
-//     {{for items tmpl="listItem" //}} indicates a nested template
-jsrender.loadString('list', '<ul>Grocery List</ul>{{for items tmpl="listItem" /}}</ul>');
+//     {{for items tmpl="#listItem" //}} indicates a nested template
+jsrender.loadString('#list', '<ul>Grocery List</ul>{{for items tmpl="#listItem" /}}</ul>');
 
 // Load child template from string
 //      Nested templates must be registered with a name matching the parent template before rendering the parent template
-jsrender.loadString('listItem', '<li>{{:name}}</li>');
+jsrender.loadString('#listItem', '<li>{{:name}}</li>');
 
 // Render the parent template with data
-jsrender.render['list']({items: [{name:'Carrots'}, {name: "Banana"}]});
+jsrender.render['#list']({items: [{name:'Carrots'}, {name: "Banana"}]});
 
 // Output is: "<ul>Grocery List</ul><li>Carrots</li><li>Banana</li></ul>"
 ```
