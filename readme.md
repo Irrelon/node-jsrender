@@ -7,7 +7,7 @@ An actively maintained wrapper for the jsrender project by @borismoore (https://
 ## Usage
 
 ### Loading a Template From a String
-```
+```javascript
 // Require the node module
 var jsrender = require('node-jsrender');
 
@@ -21,7 +21,7 @@ jsrender.render['#myTemplate']({data: 'hello'});
 ```
 
 ### Loading a Template From a File (Synchronously)
-```
+```javascript
 // Require the node module
 var jsrender = require('node-jsrender');
 
@@ -36,7 +36,7 @@ jsrender.render['#myTemplate']({data: 'hello'});
 ```
 
 ### Loading a Template From a File (Asynchronously)
-```
+```javascript
 // Require the node module
 var jsrender = require('node-jsrender');
 
@@ -55,21 +55,24 @@ jsrender.loadFile('#myTemplate', './templates/myTemplate.html', function (err, t
 });
 ```
 
-### Referencing Other Templates From Inside Templates
-In jsrender when you want to reference another template on the client-side you can use something like:
+### Nested Templates
 
-```
-{{for myData tmpl="#myTemplate" /}}
-```
+In jsrender, you can have templates that reference other templates, nested templates. But to work, you must register the nested templates before rending the parent template.
 
-On the server the usage is exactly the same but you just need to make sure you name your template correctly
-when you load it. For instance if you use the line above with the template name "#myTemplate" then you also
-need to load your template with the same name (including the hash) like so:
+```javascript
+// Require the node module
+var jsrender = require('node-jsrender');
 
-```
-jsrender.loadString('#myTemplate', '{{:data}}');
-```
-or
-```
-jsrender.loadFileSync('#myTemplate', './templates/myTemplate.html');
+// Load parent template from string
+//     {{for items tmpl="listItem" //}} indicates a nested template
+jsrender.loadString('list', '<ul>Grocery List</ul>{{for items tmpl="listItem" /}}</ul>');
+
+// Load child template from string
+//      Nested templates must be registered with a name matching the parent template before rendering the parent template
+jsrender.loadString('listItem', '<li>{{:name}}</li>');
+
+// Render the parent template with data
+jsrender.render['list']({items: [{name:'Carrots'}, {name: "Banana"}]});
+
+// Output is: "<ul>Grocery List</ul><li>Carrots</li><li>Banana</li></ul>"
 ```
