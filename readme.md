@@ -7,7 +7,7 @@ An actively maintained wrapper for the jsrender project by @borismoore (https://
 ## Usage
 
 ### Loading a Template From a String
-```
+```javascript
 // Require the node module
 var jsrender = require('node-jsrender');
 
@@ -21,7 +21,7 @@ jsrender.render['#myTemplate']({data: 'hello'});
 ```
 
 ### Loading a Template From a File (Synchronously)
-```
+```javascript
 // Require the node module
 var jsrender = require('node-jsrender');
 
@@ -36,7 +36,7 @@ jsrender.render['#myTemplate']({data: 'hello'});
 ```
 
 ### Loading a Template From a File (Asynchronously)
-```
+```javascript
 // Require the node module
 var jsrender = require('node-jsrender');
 
@@ -59,7 +59,7 @@ jsrender.loadFile('#myTemplate', './templates/myTemplate.html', function (err, t
 
 In jsrender, you can have templates that reference other templates, nested templates. But to work, you must register the nested templates before rending the parent template.
 
-```
+```javascript
 // Require the node module
 var jsrender = require('node-jsrender');
 
