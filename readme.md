@@ -55,21 +55,13 @@ jsrender.loadFile('#myTemplate', './templates/myTemplate.html', function (err, t
 });
 ```
 
-### Referencing Other Templates From Inside Templates
-In jsrender when you want to reference another template on the client-side you can use something like:
+### Nested Templates
+
+In jsrender, you can have templates that reference other templates, nested templates. But to work, you must register the nested templates before rending the parent template.
 
 ```
-{{for myData tmpl="#myTemplate" /}}
-```
-
-On the server the usage is exactly the same but you just need to make sure you name your template correctly
-when you load it. For instance if you use the line above with the template name "#myTemplate" then you also
-need to load your template with the same name (including the hash) like so:
-
-```
-jsrender.loadString('#myTemplate', '{{:data}}');
-```
-or
-```
-jsrender.loadFileSync('#myTemplate', './templates/myTemplate.html');
+var jsrender = require('node-jsrender');
+jsrender.loadString('list', '<ul>Grocery List</ul>{{for items tmpl="listItem" /}}</ul>');
+jsrender.loadString('listItem', '<li>{{:name}}</li>');
+jsrender.render['list']({items: [{name:'Carrots'}, {name: "Banana"}]});
 ```
