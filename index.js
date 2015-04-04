@@ -91,13 +91,19 @@ var JsRenderWrapper = (function () {
 	JsRenderWrapper.prototype.helpers = jsviews.views.helpers;
 	JsRenderWrapper.prototype.jsviews = jsviews;
 
-	JsRenderWrapper.prototype.express = function (tmplExt, express) {
+	JsRenderWrapper.prototype.express = function (tmplExt, express, tmplOptions) {
 		var self = this;
 
+		// Make sure tmplOptions is an object
+		tmplOptions = tmplOptions || {
+			cache: true
+		};
+
+		// Register our engine with express
 		express.engine(tmplExt, function (filePath, options, callback) {
 			var templateName = '#' + filePath;
 
-			if (jsviews.render[templateName]) {
+			if (tmplOptions.cache && jsviews.render[templateName]) {
 				// The template has already been loaded into cache
 				// Render the template with data
 				callback(null, jsviews.render[templateName](options));

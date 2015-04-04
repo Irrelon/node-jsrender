@@ -2,7 +2,7 @@
 	"author": "Rob Evans (Irrelon Software Limited)",
 	"name": "node-jsrender",
 	"description": "An actively maintained wrapper for the jsrender project by @borismoore. Uses latest source from the jsrender project and extends functionality for easy use in Node.js and express.",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"main": "./index",
 	"engines": {
 		"node": "*"
