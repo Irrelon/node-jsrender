@@ -14,11 +14,13 @@ var JsRenderWrapper = (function () {
 	 * @param {Function=} callback Optional. The callback method to execute on loading the template.
 	 */
 	JsRenderWrapper.prototype.loadFile = function (name, path, callback) {
+		var self = this;
+
 		if (name) {
 			if (path) {
 				fs.readFile(path, {encoding: 'utf8'}, function (err, data) {
 					if (!err) {
-						var result = this.loadString(name, String(data));
+						var result = self.loadString(name, String(data));
 						if (callback) { callback(false, result); }
 					} else {
 						if (callback) { callback(err); }
@@ -88,6 +90,31 @@ var JsRenderWrapper = (function () {
 	JsRenderWrapper.prototype.render = jsviews.render;
 	JsRenderWrapper.prototype.helpers = jsviews.views.helpers;
 	JsRenderWrapper.prototype.jsviews = jsviews;
+
+	JsRenderWrapper.prototype.express = function (express) {
+		var self = this;
+
+		express.engine('jsrender', function (filePath, options, callback) {
+			var templateName = '#' + filePath;
+
+			if (jsviews.render[templateName]) {
+				// The template has already been loaded into cache
+				// Render the template with data
+				callback(null, jsviews.render[templateName](options));
+			} else {
+				// Load the template
+				self.loadFile(templateName, filePath, function (err, template) {
+					if (!err) {
+						// Template was loaded
+						// Render the template with data
+						callback(null, jsviews.render[templateName](options));
+					} else {
+						callback(new Error(err));
+					}
+				});
+			}
+		});
+	};
 	
 	return JsRenderWrapper;
 }());

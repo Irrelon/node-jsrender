@@ -4,7 +4,21 @@ An actively maintained wrapper for the jsrender project by @borismoore (https://
 ## Install
 	npm install node-jsrender
 
-## Usage
+## Using With Express
+If you use express and wish to use jsRender as your express template engine you can now do so.
+You can specify the engine to use via:
+
+	var express = require('express');
+	var app = express();
+	var nodeJsRender = require('node-jsrender');
+	
+	// Register jsRender with express
+	nodeJsRender.express(app);
+	
+	// Set express template engine to jsrender
+	app.set('view engine', 'jsrender');
+
+## Usage Without Express (Manually Rendering)
 
 ### Loading a Template From a String
 ```javascript
