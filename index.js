@@ -91,10 +91,10 @@ var JsRenderWrapper = (function () {
 	JsRenderWrapper.prototype.helpers = jsviews.views.helpers;
 	JsRenderWrapper.prototype.jsviews = jsviews;
 
-	JsRenderWrapper.prototype.express = function (express) {
+	JsRenderWrapper.prototype.express = function (tmplExt, express) {
 		var self = this;
 
-		express.engine('jsrender', function (filePath, options, callback) {
+		express.engine(tmplExt, function (filePath, options, callback) {
 			var templateName = '#' + filePath;
 
 			if (jsviews.render[templateName]) {

@@ -12,11 +12,11 @@ You can specify the engine to use via:
 	var app = express();
 	var nodeJsRender = require('node-jsrender');
 	
-	// Register jsRender with express
-	nodeJsRender.express(app);
+	// Register jsRender with express to handle html files
+	nodeJsRender.express('html', app);
 	
 	// Set express template engine to jsrender
-	app.set('view engine', 'jsrender');
+	app.set('view engine', 'html');
 
 ## Usage Without Express (Manually Rendering)
 
