@@ -6,7 +6,10 @@
 npm install jsrender
 ```
 
-This project will no longer be actively maintained.
+*This project will no longer be actively maintained*.
+
+
+# PREVIOUS README CONTENTS
 
 An ~~actively maintained~~ wrapper for the jsrender project by @borismoore (https://github.com/BorisMoore/jsrender). Uses latest source from the jsrender project and extends functionality for easy use in Node.js.
 
