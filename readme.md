@@ -1,8 +1,22 @@
 # Node-JSRender
-An actively maintained wrapper for the jsrender project by @borismoore (https://github.com/BorisMoore/jsrender). Uses latest source from the jsrender project and extends functionality for easy use in Node.js.
+
+!!! UPDATE 5th Feb 2016: Boris Moore (the creator of jsrender) has now released a new version of jsrender that includes support for Node.js and Browserify. You no longer need this library (node-jsrender) to use jsrender with Node.js. Please use the official jsrender package:
+
+```bash
+npm install jsrender
+```
+
+This project will no longer be actively maintained.
+
+An ~~actively maintained~~ wrapper for the jsrender project by @borismoore (https://github.com/BorisMoore/jsrender). Uses latest source from the jsrender project and extends functionality for easy use in Node.js.
 
 ## Install
-	npm install node-jsrender
+
+> PLEASE SEE NOTE ABOVE - THIS LIBRARY IS NO LONGER MAINTAINED AND HAS BEEN REPLACED
+
+```bash
+npm install node-jsrender
+```
 
 ## Using With Express
 If you use express and wish to use jsRender as your express template engine you can now do so.
