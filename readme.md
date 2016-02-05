@@ -6,7 +6,10 @@
 npm install jsrender
 ```
 
+The official package github repo is available here: https://github.com/BorisMoore/jsrender
+
 **This project will no longer be actively maintained**.
+
 
 
 # PREVIOUS README CONTENTS
