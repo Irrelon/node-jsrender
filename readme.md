@@ -6,7 +6,7 @@
 npm install jsrender
 ```
 
-*This project will no longer be actively maintained*.
+**This project will no longer be actively maintained**.
 
 
 # PREVIOUS README CONTENTS
