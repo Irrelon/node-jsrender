@@ -1,9 +1,12 @@
 {
   "author": "Rob Evans (Irrelon Software Limited)",
   "name": "node-jsrender",
-  "description": "A wrapper for the jsrender project by @borismoore. Uses latest source from the jsrender project and extends functionality for easy use in Node.js and express.",
-  "version": "1.0.8",
+  "description": "A wrapper for the jsrender project by @borismoore. However, this wrapper is no longer needed, since JsRender now natively provides full integration and extended functionality for Node.js, Express, Hapi and Browserify",
+  "version": "1.0.9",
   "main": "./index",
+  "dependencies": {
+    "jsrender": "^0.9.73"
+  },
   "engines": {
     "node": "*"
   }

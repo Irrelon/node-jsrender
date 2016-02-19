@@ -1,6 +1,6 @@
 # Node-JSRender
 
-!!! UPDATE 5th Feb 2016: Boris Moore (the creator of jsrender) has now released a new version of jsrender that includes support for Node.js and Browserify. You no longer need this library (node-jsrender) to use jsrender with Node.js. Please use the official jsrender package:
+!!! UPDATE 5th Feb 2016: Boris Moore (the creator of jsrender) recently released a new official ***jsrender*** version (https://www.npmjs.com/package/jsrender) that includes full support for Node.js and Browserify. This ***node-jsrender*** wrapper package is therefore no longer needed. Please use the official ***jsrender*** package, directly, instead:
 
 ```bash
 npm install jsrender
